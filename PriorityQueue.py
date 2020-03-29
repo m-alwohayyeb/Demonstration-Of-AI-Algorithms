@@ -7,8 +7,20 @@ class PriorityQueue(object):
     def __init__(self):
         self.queue = []
 
-    # Calculates the heuristic cost from the current state to the goal state.
-    def h(self, start, goal):
+    def LinearConflict(self, start, goal):
+
+        size  = int(math.sqrt(len(start)))
+        start = np.reshape(np.array(start), (size, size))
+        goal  = np.reshape(np.array(goal),  (size, size))
+        temp  = 0
+
+        for i in range(0, size):
+            for j in range(0, size):
+                if start[i][j] != 0 and start[i][j] != goal[i][j] and (start[i][j] in goal[i:] or start[i][j] in goal[:j]):
+                    temp += 1
+        return temp
+
+    def ManhattanDistance(self, start, goal):
 
         size  = int(math.sqrt(len(start)))
         start = np.reshape(np.array(start), (size, size))
@@ -20,6 +32,11 @@ class PriorityQueue(object):
                 if start[i][j] != goal[i][j] and start[i][j] != 0:
                     temp += 1
         return temp
+
+    # Calculates the heuristic cost from the current state to the goal state.
+    def h(self, start, goal):
+        return self.ManhattanDistance(start, goal) + 2 * self.LinearConflict(start, goal)
+        
 
     # Calculates the actual accumulative cost from the start to the current state.
     def g(self, state):
@@ -55,3 +72,15 @@ class PriorityQueue(object):
         return temp
         
 
+state = [
+    4,7,2,
+    5,8,3,
+    1,0,6
+]
+goal = [
+    1,2,3,
+    4,5,6,
+    7,8,0
+]
+temp = PriorityQueue()
+print(temp.LinearConflict(state, goal))
