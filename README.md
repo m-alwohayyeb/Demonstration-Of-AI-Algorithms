@@ -13,5 +13,5 @@
   - Tested gready search.
   - Retested A* search.
 
--Omar
+- Omar
   - started the gethub
