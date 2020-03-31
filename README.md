@@ -16,9 +16,11 @@
 - Omar
   - started the gethub
   
-  -Mk
-    Created heuristic class
-    Optimized PrioQueue (linked queue to heap q)
-    Optimized generate_child(slightly thought) 
+ - Mk
+    - Created heuristic class
+    - Optimized PrioQueue (linked queue to heap q)
+    - Optimized generate_child(slightly thought) 
+    
     Before: Depeth 31 827.4844000339508s
+    
     After: Depth 31   230.8806472619374s
