@@ -7,7 +7,7 @@ class GreadySearch(object):
         pass
     
     def gready_search_algorithm(self,initial_state):
-        start_node = Node(initial_state, None, None, 0)
+        start_node = Node(initial_state, None, None, 0,initial_state.index(0))
 
         if start_node.goal_test().all():
             return start_node.find_solution()

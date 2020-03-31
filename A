@@ -1,0 +1,149 @@
+from Node import *
+import numpy as np
+import math
+
+# arr is state
+def getInvCount( arr ):
+    
+    N=math.isqrt(len(arr))
+
+    inv_count = 0
+    for i in range(0,N*N-1):
+        for j in range( i+1,N * N):  
+            if arr[j] and arr[i] and arr[i] > arr[j]:
+                inv_count+=1
+    return inv_count
+    
+def findXPosition(arr):
+    
+    N = len(arr[0])
+    for i in range(N - 1, -1,-1):           
+        for j in range(N - 1, -1,-1):
+            if arr[i][j] == 0:
+                return N - i
+    return -1
+
+
+def isSolvable( node = Node() ):
+    inv = getInvCount(node.state)
+    n = math.isqrt(len(node.state))
+    twoD=np.reshape(node.state,(-1,n))        
+    if n % 2 == 1 and inv % 2 == 0:
+        return True            
+    else:
+        pos = findXPosition(twoD)
+        print(pos)
+        if pos == -1:
+            return False
+        elif pos % 2 == 1:
+            return inv % 2 == 0 
+        else:
+            return inv % 2 == 1  
+    return False   
+
+def expand( node=Node()): 
+    neighbors = []
+    state = node.state
+    n = math.isqrt(len(state))
+    
+    curPos = node.pos0
+    state1 = state.copy()
+    
+    if(curPos%n!=0):
+        state1[curPos], state1[curPos-1] = state1[curPos-1] ,state1[curPos]
+        node1 = Node(state=state1, pos0 = curPos-1, Parent = node,cost=node.cost+1)
+        neighbors.append(node1)
+    if(curPos%n != n-1):
+        state1 = state.copy()
+        state1[curPos], state1[curPos+1] = state1[curPos+1] ,state1[curPos]
+        node1 = Node(state=state1, pos0 = curPos+1, Parent = node,cost=node.cost+1)
+        neighbors.append(node1)
+    if(curPos+n <= n*n-1):
+        state1 = state.copy()
+        state1[curPos], state1[curPos+n] = state1[curPos+n] ,state1[curPos]
+        node1 = Node(state=state1, pos0 = curPos+n, Parent = node,cost=node.cost+1)
+        neighbors.append(node1)
+    if(curPos-n >= 0):
+        state1 = state.copy()
+        state1[curPos], state1[curPos-n] = state1[curPos-n] ,state1[curPos]
+        node1 = Node(state=state1, pos0 = curPos-n, Parent = node,cost=node.cost+1)
+        neighbors.append(node1)
+    return neighbors 
+
+def goalTest(node = Node()):
+    print(node.cost)
+    n = len(node.state)
+    goal = []
+    for i in range(1,n):
+        goal.append(i)
+    goal.append(0)
+    if(node.state == goal):
+        return True
+    return False
+
+
+def rebuildPath(end = Node()):
+    path = [end] 
+    state = end.Parent
+    while state.Parent:
+        path.append(state)
+        state = state.Parent
+    path.append(state) ## to add the last state
+    return reversed(path)
+
+# def numberOfMisplaced(state):
+#     count = 0
+#     for i in state:
+#         if(i-1 == state[i]):
+#             count+=1
+#     return count;  
+# def euclideanDistance(state):
+#     sum = 0
+#     for i in state:
+#         if(i==0):
+#             continue 
+#         sum+= distOned(state[i],state[state[i-1]])
+#     return sum
+    
+# def distOneD(p1,p2):
+#     x1 = p1//3  
+#     y1 = p1%3
+#     x2 = p2//3
+#     y2 = p2%3
+#     dist = sqrt( (x2 - x1)**2 + (y2 - y1)**2 )
+#     return dist
+        
+    
+# def h(start,goal):
+#     temp = 0
+
+#     twoD=np.reshape(start,(-1,n))    
+
+#     for i in range(0,self.n):
+#         for j in range(0,self.n):
+#             if start[i][j] != goal[i][j] and start[i][j] != 0:
+#                 temp += 1
+#     return temp
+
+
+def calculateManhattan(initial_state = Node()):
+    initial_config = initial_state.state
+    manDict = 0
+    for i,item in enumerate(initial_config):
+        if(i==0): 
+            continue
+        prev_row,prev_col = int(i/ 3) , i % 3
+        goal_row,goal_col = int(item /3),item % 3
+        manDict += abs(prev_row-goal_row) + abs(prev_col - goal_col)
+    return manDict
+
+node=Node(state=[6,4,7,8,5,0,3,2,1],pos0=4)
+print((calculateManhattan(node)))
+
+#   2 1 3
+#   5 4 0
+#   6 7 8
+
+# 1 2 3
+# 4 5 6
+# 7 0 8
