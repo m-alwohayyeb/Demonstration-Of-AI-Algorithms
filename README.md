@@ -21,6 +21,6 @@
     - Optimized PrioQueue (linked queue to heap q)
     - Optimized generate_child(slightly thought) 
     
-    Before: 8 puzzle Depth 31 : 827.44s
+    - Before: 8 puzzle Depth 31 : 827.44s
     
-    After: 8 puzzle Depth 31:   230.88s
+    - After: 8 puzzle Depth 31:   230.88s
