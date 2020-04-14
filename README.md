@@ -25,7 +25,3 @@
     
     - After: 8 puzzle Depth 31:   230.88s
   
-  -To do: 
-   - Use heapq in greedy search( mimic the same way I used in A* )
-   - Change explored lists to sets instead,(Again check A*)
-  
