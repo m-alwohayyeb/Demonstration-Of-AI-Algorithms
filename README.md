@@ -3,7 +3,7 @@
 
 Project code for Artificial Intelligence Course. In this project, We developed code for demonstrating different common AI algorithms when applied to the N-Puzzle problem. .
 
-### Install
+## Install
 
 This project requires **Python 3.x** and the following Python libraries installed:
 
@@ -14,7 +14,7 @@ You will also need to have software installed to run and execute a [.py](https:/
 
 I recommend installing [Anaconda](https://www.continuum.io/downloads), a pre-packaged Python distribution that contains all of the necessary libraries and software for this project.
 
-### Run
+## Run
 
 The program was deployed onto a website, which can be found [here](https://npuzzle.pythonanywhere.com/)
 
