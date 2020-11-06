@@ -17,3 +17,8 @@ I recommend installing [Anaconda](https://www.continuum.io/downloads), a pre-pac
 ### Run
 
 The program was deployed onto a website, which can be found [here](https://npuzzle.pythonanywhere.com/)
+
+## Team
+- [Mohammed Al-Khrashi](https://github.com/MohammedAlkhrashi)
+- [Mohammed Al-Ohaydab](https://github.com/MohammedAlohaydab)
+- [Mohammed Al-Wohayyeb](https://github.com/m-alwohayyeb)
